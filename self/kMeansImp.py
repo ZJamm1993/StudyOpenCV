@@ -12,6 +12,13 @@ def distance(obj0, obj1):
     res = np.sqrt(tota)
     return res
 
+def fakeDistance(obj0, obj1):
+    size = obj0.shape[0]
+    tota = 0
+    for i in range(size):
+        tota += np.fabs(obj0[i] - obj1[i])
+    return tota
+
 def average(objs):
     count = objs.shape[0]
     avgsize = objs.shape[1]
@@ -38,7 +45,7 @@ def myKMeans(samples, kCount, maxIter = 50):
             testdis = 10000000000
             for cenindex in range(kCount):
                 cent = centers[cenindex]
-                dis = distance(sam, cent)
+                dis = fakeDistance(sam, cent)
                 if dis <= testdis:
                     testdis = dis
                     labels[samindex] = cenindex
@@ -55,7 +62,7 @@ def myKMeans(samples, kCount, maxIter = 50):
 
 def testKMean():
     wei = 0
-    count = 5
+    count = 4
 
     Z = np.random.randint(25, 50, (1, 2))
     for i in range(count):
@@ -73,7 +80,7 @@ def testKMean():
     print(center)
 
     # Now separate the data, Note the flatten()
-    colors = ['red', 'green', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y']
+    colors = ['red', 'green', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'red', 'green', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'red', 'green', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'red', 'green', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y', 'r', 'g', 'm', 'c', 'y']
     ravel = label.ravel()
     for i in range(count):
         A = Z[ravel == i]
